@@ -239,7 +239,7 @@ const Create = () => {
               key={index}
               className={`w-[95%] h-[25vh] lg:w-[22%] bg-transparent flex flex-col justify-evenly items-center mb-3 lg:mb-0 transition-transform ease-in-out hover:cursor-pointer hover:shadow-md hover:scale-105 hover:bg-gray-300 hover:rounded-md border-2 border-gray-400 ${
                 formData?.budget === item.title
-                  ? "bg-gray-400 rounded-md shadow-lg scale-105 border-black"
+                  ? "bg-gray-400 rounded-md shadow-lg scale-105 border-2 border-blue-500"
                   : ""
               }`}
               onClick={() => handleInputChange("budget", item.title)}
@@ -271,7 +271,7 @@ const Create = () => {
               key={index}
               className={`w-[95%] h-[28vh] lg:w-[22%] lg:h-[35vh] bg-transparent flex flex-col justify-evenly items-center mb-4 lg:mb-0 transition-transform ease-in-out border-2 border-gray-400 hover:cursor-pointer hover:bg-gray-300 hover:scale-105 hover:rounded-md ${
                 formData?.noOfPeople === item.people
-                  ? "shadow-lg scale-105 rounded-md border-black bg-gray-400"
+                  ? "shadow-lg scale-105 rounded-md border-2 border-blue-500 bg-gray-400"
                   : ""
               }`}
               onClick={() => handleInputChange("noOfPeople", item.people)}

@@ -6,6 +6,8 @@ import { useSnackbar } from "notistack";
 import Information from "@/components/custom/Information";
 import Header from "@/components/custom/Header";
 import Clinic from "@/components/custom/Clinic";
+import Recommend from "@/components/custom/Recommend";
+import WellnessPlan from "@/components/custom/WellnessPlan";
 const View = () => {
   const { enqueueSnackbar } = useSnackbar();
   //Set The State For Application:
@@ -37,9 +39,12 @@ const View = () => {
       <Header />
       {/* Information Section */}
       <Information planInfo={wellnessPlan} />
-      {/* Recommended Hospitals/Clinics/Wellness Buildings */}
+      {/* Recommended Hospitals/Clinics/Wellness Buildings: */}
       <Clinic planInfo={wellnessPlan} />
+      {/* Recommended Wellness Places To Visit: */}
+      <Recommend planInfo={wellnessPlan} />
       {/* Each Day Plans */}
+      <WellnessPlan wellnessData={wellnessPlan} />
     </div>
   );
 };

@@ -115,7 +115,7 @@ Generate a personalized Health and Wellness Plan for the following details:
 - **Budget**: {budget} (Currency relative to {location})
 - **Health Concern**: {healthConcern}
 
-Provide the following details in your response:
+Provide the following details in your response, ensuring all health concerns follow the same JSON structure:
 
 1. **Healthcare Options**:
    Always structure healthcare options consistently, using the following format:
@@ -150,11 +150,65 @@ Provide the following details in your response:
    - Provide a day-by-day itinerary, ensuring that all activities or healthcare visits are structured as per the wellness activities format described above.
    - If data for any day is unavailable, leave it empty for that day while maintaining the JSON structure.
 
+Ensure that the overall response structure always matches the following JSON format:
+
+\`\`\`json
+{
+  "healthcareOptions": [
+    {
+      "name": "N/A",
+      "address": "N/A",
+      "priceRange": {
+        "consultation": 0,
+        "services": 0
+      },
+      "facilityImage": "",
+      "geoCoordinates": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "rating": 0,
+      "description": "No description available"
+    }
+  ],
+  "personalizedWellnessPlans": [
+    {
+      "activityName": "N/A",
+      "activityImage": "",
+      "description": "No description available",
+      "placeName": "N/A",
+      "placeDetails": "No details available",
+      "placeImage": "",
+      "geoCoordinates": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "activityPricing": 0,
+      "rating": 0,
+      "suggestedTimeSchedule": "Any time"
+    }
+  ],
+  "itinerary": [
+    {
+      "day": 1,
+      "activities": []
+    },
+    {
+      "day": 2,
+      "activities": []
+    },
+    {
+      "day": 3,
+      "activities": []
+    }
+  ]
+}
+\`\`\`
+
 ### Important Notes:
 - Always access healthcare options data from: \`wellnessData?.wellnessPlan?.healthcareOptions || []\`.
 - If any key data (e.g., healthcareOptions or activities) is missing or incomplete, use the defaults outlined above.
-- Maintain a consistent JSON structure for all health concerns (e.g., stress, anxiety, etc.).
+- Maintain a consistent JSON structure for all health concerns (e.g., stress, anxiety, back pain).
 - Validate and handle edge cases like missing fields, defaulting to specified placeholders or values.
-
-Output the response in **JSON format**.
+- The \`itinerary\` section should follow the format provided, even if the information is unavailable for specific days.
 `;

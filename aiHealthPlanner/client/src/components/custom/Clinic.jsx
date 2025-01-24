@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 const Clinic = ({ planInfo }) => {
   const healthcareOptions =
     planInfo?.wellnessData?.healthcareOptions ??
+    planInfo?.wellnessData?.healthAndWellnessPlan?.healthcareOptions ??
     planInfo?.wellnessData?.wellnessPlan?.healthcareOptions;
   return (
-    <div className="w-[95%] bg-transparent mb-[2rem] flex flex-col justify-start items-start p-2">
+    <div className="w-[95%] bg-transparent mb-[1rem] flex flex-col justify-start items-start p-2">
       <div className="mb-[2rem] text-[1.35rem] font-bold text-center">
         Wellness Destination Recommendations:
       </div>
@@ -13,7 +14,7 @@ const Clinic = ({ planInfo }) => {
         {healthcareOptions?.map((item, index) => (
           <div
             key={index}
-            className="w-[95%] h-[75vh] mt-2 mb-2 lg:mb-[1.25rem] lg:mr-2 lg:w-[25%] lg:h-[80vh] bg-transparent flex flex-col justify-start items-center border-2 border-gray-200 hover:cursor-pointer rounded-md shadow-sm transition-transform ease-in-out hover:scale-105 hover:bg-gray-300"
+            className="w-[95%] h-[80vh] mt-2 mb-2 lg:mb-[1.25rem] lg:mr-2 lg:w-[25%] lg:h-[85vh] bg-transparent flex flex-col justify-start items-center border-2 border-gray-200 hover:cursor-pointer rounded-md shadow-sm transition-transform ease-in-out hover:scale-105 hover:bg-gray-300"
           >
             <Link
               to={`https://www.google.com/maps/search/?api=1&query=${item?.name} ${item?.address}`}
@@ -30,16 +31,20 @@ const Clinic = ({ planInfo }) => {
                   backgroundRepeat: "no-repeat",
                 }}
               ></div>
-              <div className="text-[1.10rem] mb-1 font-bold">{item?.name}</div>
-              <div className="text-[1rem] mb-1">📍 {item?.address}</div>
-              <div className="text-[1rem] mr-2 mb-1">
+              <div className="text-[1.10rem] mb-1 font-bold text-center">
+                {item?.name}
+              </div>
+              <div className="text-[1rem] mb-1 text-center">
+                📍 {item?.address}
+              </div>
+              <div className="text-[1rem] mr-2 mb-1 text-center">
                 💬 Consultation: {item?.priceRange?.consultation}{" "}
               </div>
               <div className="text-[1rem] mr-2 mb-2 text-center">
                 ⚕️ Services: {planInfo?.wellnessData?.currency}{" "}
                 {item?.priceRange?.services}{" "}
               </div>
-              <div className="text-[1rem] mr-2 mb-1">
+              <div className="text-[1rem] mr-2 mb-1 text-center">
                 ⭐ Rating: {item?.rating}
               </div>
               <div className="mt-[2rem] mb-1 text-[1rem] p-2 text-center">
