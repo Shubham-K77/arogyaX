@@ -1,7 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { IoIosSend } from "react-icons/io";
 import { Button } from "../ui/button";
+import { getPlaceDetails } from "@/services/GlobalApi";
+import { useSnackbar } from "notistack";
+import { useEffect } from "react";
 const Information = ({ planInfo }) => {
+  const { enqueueSnackbar } = useSnackbar();
+  useEffect(() => {
+    if (planInfo) {
+      getPlacePhoto();
+    }
+  }, [planInfo]);
+
+  const getPlacePhoto = async () => {
+    const data = {
+      textQuery: planInfo?.userSelection?.location?.label,
+    };
+    try {
+      const response = await getPlaceDetails(data);
+      console.log(response.data);
+    } catch (error) {
+      const errorMessage = "Unable To Fetch The Data!";
+      enqueueSnackbar(errorMessage, { variant: "error" });
+    }
+  };
   return (
     <>
       {/* Image Section   */}
