@@ -1,47 +1,58 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { IoIosSend } from "react-icons/io";
 import { Button } from "../ui/button";
-import { getPlaceDetails } from "@/services/GlobalApi";
-import { useSnackbar } from "notistack";
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 const Information = ({ planInfo }) => {
-  const { enqueueSnackbar } = useSnackbar();
+  const [imageInfo, setImageInfo] = useState(null);
   useEffect(() => {
     if (planInfo) {
       getPlacePhoto();
     }
   }, [planInfo]);
-
   const getPlacePhoto = async () => {
-    const data = {
-      textQuery: planInfo?.userSelection?.location?.label,
-    };
     try {
-      const response = await getPlaceDetails(data);
-      console.log(response.data);
+      const placeId = planInfo?.userSelection?.location?.value?.place_id;
+      if (!placeId) {
+        console.error("placeId is not defined in planInfo");
+        return;
+      }
+      const response = await axios.get(
+        "http://localhost:5555/googleApi/maps-api",
+        {
+          params: { placeid: placeId },
+        }
+      );
+      const photos = response?.data?.result?.photos;
+      setImageInfo(photos[0]);
     } catch (error) {
-      const errorMessage = "Unable To Fetch The Data!";
-      enqueueSnackbar(errorMessage, { variant: "error" });
+      console.error("Error fetching place photo:", error.message);
     }
   };
+
   return (
     <>
-      {/* Image Section   */}
-      <div
-        className="w-[95%] h-[50vh] bg-amber-500 rounded-md mt-2 mb-[2rem]"
-        style={{
-          backgroundImage: `url('/Images/placeHolder.avif')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      ></div>
+      {/* Image Section */}
+      {imageInfo && (
+        <div
+          className="w-[95%] h-[65vh] rounded-md mt-2 mb-[2rem]"
+          style={{
+            backgroundImage: `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=${
+              imageInfo.width
+            }&photo_reference=${imageInfo.photo_reference}&key=${
+              import.meta.env.VITE_GOOGLE_PLACES_API_KEY
+            })`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        ></div>
+      )}
       {/* Label Information */}
       <div className="w-[95%] flex flex-col justify-center items-start p-2 mb-[2rem]">
         <div className="mb-[2rem] flex justify-around items-center w-[95%] lg:w-[35%]">
-          {/* Location Name   */}
+          {/* Location Name */}
           <div className="text-[1.45rem] font-bold mr-2">
             {planInfo?.userSelection?.location?.label}
           </div>

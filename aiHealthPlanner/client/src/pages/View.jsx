@@ -45,6 +45,10 @@ const View = () => {
       <Recommend planInfo={wellnessPlan} />
       {/* Each Day Plans */}
       <WellnessPlan wellnessData={wellnessPlan} />
+      {/* Footer */}
+      <div className="mb-[2rem] mt-[2rem] text-[1.15rem] text-gray-900">
+        Crafted with care by Team NeoApex 🙏
+      </div>
     </div>
   );
 };
