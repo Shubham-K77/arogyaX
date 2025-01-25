@@ -42,13 +42,11 @@ const Create = () => {
   };
   //Display The Change In FormField:
   useEffect(() => {}, [formData]);
-
   //Login oAuth:
   const logIn = useGoogleLogin({
     onSuccess: (codeResponse) => getUserProfile(codeResponse),
     onError: (error) => console.error(error),
   });
-
   //Get User Profile:
   const getUserProfile = async (tokenInfo) => {
     try {
@@ -61,11 +59,16 @@ const Create = () => {
           },
         }
       );
-      Cookies.set("user", JSON.stringify(response.data), {
-        expires: 1,
-        path: "/",
-        sameSite: "strict",
-      });
+      // Check if user cookie already exists
+      const existingUser = Cookies.get("user");
+      if (!existingUser) {
+        // Create cookie if it doesn't exist
+        Cookies.set("user", JSON.stringify(response.data), {
+          expires: 1,
+          path: "/",
+          sameSite: "strict",
+        });
+      }
       setOpenDialog(false);
       handleGeneratePlan();
     } catch (error) {

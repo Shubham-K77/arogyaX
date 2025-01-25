@@ -35,11 +35,16 @@ const Header = () => {
           },
         }
       );
-      Cookies.set("user", JSON.stringify(response.data), {
-        expires: 1,
-        path: "/",
-        sameSite: "strict",
-      });
+      // Check if user cookie already exists
+      const existingUser = Cookies.get("user");
+      if (!existingUser) {
+        // Create cookie if it doesn't exist
+        Cookies.set("user", JSON.stringify(response.data), {
+          expires: 1,
+          path: "/",
+          sameSite: "strict",
+        });
+      }
       window.location.reload();
     } catch (error) {
       const errorMessage = "Unable To Login";
