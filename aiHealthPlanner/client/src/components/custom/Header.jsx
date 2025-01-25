@@ -77,7 +77,7 @@ const Header = () => {
           <Popover>
             <PopoverTrigger className="w-[52%] lg:w-[45%]">
               <div
-                className="lg:w-[50%] h-[10vh] lg:h-[9vh] rounded-[50%] ml-4 shadow-md"
+                className="lg:w-[50%] h-[10vh] lg:h-[9vh] rounded-[50%] ml-4 shadow-lg border-2 border-gray-300"
                 style={{
                   backgroundImage: `url(${user.picture})`,
                   backgroundRepeat: "no-repeat",

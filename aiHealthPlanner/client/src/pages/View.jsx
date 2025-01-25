@@ -39,12 +39,12 @@ const View = () => {
       <Header />
       {/* Information Section */}
       <Information planInfo={wellnessPlan} />
+      {/* Each Day Plans */}
+      <WellnessPlan wellnessData={wellnessPlan} />
       {/* Recommended Hospitals/Clinics/Wellness Buildings: */}
       <Clinic planInfo={wellnessPlan} />
       {/* Recommended Wellness Places To Visit: */}
       <Recommend planInfo={wellnessPlan} />
-      {/* Each Day Plans */}
-      <WellnessPlan wellnessData={wellnessPlan} />
       {/* Footer */}
       <div className="mb-[2rem] mt-[2rem] text-[1.15rem] text-gray-900">
         Crafted with care by Team NeoApex 🙏
